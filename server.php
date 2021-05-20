@@ -3,12 +3,12 @@
 
     header('Content-Type: application/json'); 
     
-    if(strtolower(isset($_GET['genre'])) && strtolower($_GET['genre']) != '') {       
+    if(isset($_GET['genre']) && $_GET['genre'] != '') {       
         
         $filteredDatabase = [];
 
         foreach($database as $item) {
-            if($item['genre'] == $_GET['genre']) {
+            if(strtolower($item['genre']) == strtolower($_GET['genre'])) {
                 $filteredDatabase[] = $item;
             }
         }
