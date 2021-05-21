@@ -7,12 +7,12 @@ var app = new Vue({
     methods: {
         getCds() {
             axios
-                .get('http://localhost:8888/php-ajax-dischi/server.php', {
+                .get('http://localhost:8888/php-ajax-dischi/php-vue/server.php', {
                     params: {
                         genre: this.selectedGenre
                     }
                 })
-                .then((response) => {
+                .then((response) => {                    
                     this.cds = response.data;
                 });
         }

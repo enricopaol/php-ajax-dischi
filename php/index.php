@@ -1,3 +1,7 @@
+<?php 
+    include __DIR__ . '/../database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,7 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
@@ -18,14 +22,12 @@
         <!-- HEADER -->
         <header>
             <div class="logo">
-                <img src="img/download.png" alt="logo-spotify">
+                <img src="../img/download.png" alt="logo-spotify">
             </div>
 
             <div class="filter">
                 <label for="filter-genre">Filtra per genere:</label>
                 <select 
-                    v-model="selectedGenre"
-                    @change="getCds()"
                     name="filter-genre" 
                     id="filter-genre"
                     
@@ -47,17 +49,19 @@
 
                 
                 <div class="filtered-albums">
-                    <div                          
-                        v-for="cd in cds"
-                        class="single-album-container"
-                    >
-                        <div class="single-album">
-                            <img :src="cd.poster" :alt="cd.title">
-                            <div class="album-title">{{ cd.title }}</div>
-                            <div class="album-author">{{ cd.author }}</div>
-                            <div class="album-year">{{ cd.year }}</div>
+
+                    <!-- Single CD -->
+                    <?php foreach($database as $cd) { ?>
+                        <div class="single-album-container">                        
+                            <div class="single-album">
+                                <img src="<?php echo $cd['poster']?>" alt="<?php echo $cd['title']?>">
+                                <div class="album-title"><?php echo $cd['title']?></div>
+                                <div class="album-author"><?php echo $cd['author']?></div>
+                                <div class="album-year"><?php echo $cd['year']?></div>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
+                    
                 </div>
                                 
                 
@@ -65,6 +69,6 @@
         </main>
     </div>
 
-    <script src="js/script.js"></script>
+    
 </body>
 </html>
